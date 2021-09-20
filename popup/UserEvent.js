@@ -1,8 +1,24 @@
 let userEvents = [];
 
-chrome.storage.sync.get("recording", ({ recording }) => {
-    console.log(`Recording is set to  ${recording}`);
-});
+document.addEventListener("click", () => {
+    chrome.storage.sync.get("recording", ({ recording }) => {
+        if(recording === "true") {
+            document.addEventListener('click', handleUserEvent);
+            document.addEventListener('change', handleUserEvent);
+        } else {
+            document.removeEventListener('click', handleUserEvent);
+            document.removeEventListener('change', handleUserEvent);    
+
+            const events = { userActions: userEvents }
+
+            chrome.storage.sync.set({ events: JSON.stringify(events) });
+
+            chrome.storage.sync.get("events", ({ events }) => {
+                console.log(events);
+            });
+        }
+    });
+})
 
 function handleUserEvent({ type, target }) {
     if(type === 'click') {
