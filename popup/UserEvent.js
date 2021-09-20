@@ -1,7 +1,6 @@
-let recording = false;
 let userEvents = [];
 
-chrome.storage.sync.get("recording", ({ recoding }) => {
+chrome.storage.sync.get("recording", ({ recording }) => {
     console.log(`Recording is set to  ${recording}`);
 });
 
