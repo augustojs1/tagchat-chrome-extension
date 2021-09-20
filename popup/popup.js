@@ -8,7 +8,7 @@ chrome.storage.sync.get("recording", ({ recording }) => {
     if (isRecording === "true") {
         launcher.innerText = "Stop";
     } else {
-        launcher.innerText = "Record";
+        launcher.innerHTML = ` Record`;
     }
 });
 
@@ -17,7 +17,7 @@ launcher.addEventListener('click', (event) => {
     event.preventDefault();
 
     if (isRecording === "true") {  // quando estiver gravando(true) vai cair aqui ao clicar, parando de gravar
-        launcher.innerHTML = "Record"
+        launcher.innerHTML = `Record`;
         isRecording = "false";
         chrome.storage.sync.set({ recording: "false" });
 
