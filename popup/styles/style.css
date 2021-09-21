@@ -63,13 +63,14 @@ img {
 .stop-btn:hover {
     color: #b71a3b;
     background-color: #FEFEFE;
-    border: 1px solid #b71a3b;
+    text-align: center;
 }
 
 .modal-header {
     align-items: center;
     border-bottom: 0.7px solid #FEFEFE;
     text-align: center;
+    border-radius: 3px;
 }
 
 .logo {

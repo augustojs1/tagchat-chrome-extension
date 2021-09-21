@@ -2,11 +2,11 @@
   "manifest_version": 2,
   "name": "TagChat Launcher",
   "description": "Quick launch TagChat user assistance service.",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["popup/UserEvent.js"]
+      "js": ["content/UserEvent.js"]
     }
   ],
   "icons": { "128": "assets/tagchat128.png" },
