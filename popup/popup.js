@@ -1,4 +1,5 @@
 const launcher = document.querySelector('.launch-btn');
+const iconBtn = document.querySelector('.icon-btn');
 let isRecording = "false";
 
 // verifica no chrome storage se está ou não gravando e então muda o texto do botão para "Record" ou "Stop" 
@@ -17,9 +18,11 @@ launcher.addEventListener('click', (event) => {
     event.preventDefault();
 
     if (isRecording === "true") {  // quando estiver gravando(true) vai cair aqui ao clicar, parando de gravar
-        launcher.innerHTML = `Record`;
+        launcher.innerText = "Record";
+        iconBtn.classList.remove("fas", "fa-stop");
         launcher.classList.remove("stop-btn");
         launcher.classList.add("launch-btn");
+        iconBtn.classList.add("fas", "fa-play", "fa-xs");
         isRecording = "false";
         chrome.storage.sync.set({ recording: "false" });
 
@@ -31,9 +34,11 @@ launcher.addEventListener('click', (event) => {
 
     } else {  // começa sem gravar e cai aqui para gravar após clicar em record
         chrome.storage.sync.set({ eventsTeste: [] });
-        launcher.innerHTML = `Stop`;
-        launcher.classList.remove("launch-btn");
+        launcher.innerText = "Stop";
+        iconBtn.classList.remove("launch-btn");
+        launcher.classList.remove("fas", "fa-play", "fa-xs");
         launcher.classList.add("stop-btn");
+        iconBtn.classList.add("fas", "fa-stop");
         isRecording = "true";
         chrome.storage.sync.set({ recording: "true" });
 

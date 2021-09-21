@@ -41,6 +41,10 @@ img {
     text-align: center;
 }
 
+.icon-btn {
+    margin-right: 1rem;
+}
+
 .stop-btn {
     z-index: 9999999;
     border: 1px solid #b71a3b;
