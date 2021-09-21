@@ -1,59 +1,63 @@
 let userEvents = [];
-let newUserAction;
 
-chrome.storage.onChanged.addListener(function(changes, namespace) {
-    if ("recording" in changes) {
-        chrome.storage.sync.get("recording", ({ recording }) => {
-            if (recording === "true") {
-                document.addEventListener('click', handleUserEvent);
-                document.addEventListener('change', handleUserEvent);
-            } else {
-                document.removeEventListener('click', handleUserEvent);
-                document.removeEventListener('change', handleUserEvent);    
-    
-                const events = { userActions: userEvents }
-    
-                chrome.storage.sync.set({ events: JSON.stringify(events) });
-    
-                chrome.storage.sync.get("events", ({ events }) => {
-                    // console.log(events);
-                });
-            }
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+  if ("recording" in changes) {
+    chrome.storage.sync.get("recording", ({ recording }) => {
+      if (recording === "true") {
+        document.addEventListener("click", handleUserEvent);
+        document.addEventListener("change", handleUserEvent);
+      } else {
+        document.removeEventListener("click", handleUserEvent);
+        document.removeEventListener("change", handleUserEvent);
+
+        let retorno;
+        chrome.storage.sync.get("eventsTeste", ({ eventsTeste }) => {
+          retorno = eventsTeste;
         });
-    }
+
+        chrome.storage.sync.set({ eventsTeste: [] });
+
+        //lugar onde irá exportar a gravação para o puppeteer
+      }
+    });
+  }
 });
 
 function handleUserEvent({ type, target }) {
-    if(type === 'click') {
-        chrome.storage.sync.get("userActions", ({ userAction }) => {
+  if (type === "click") {
+    chrome.storage.sync.get(["eventsTeste"], (result) => {
+      console.log("-------------------");
+      result.eventsTeste.push({
+        URL: target.baseURI,
+        target: {
+          tag: target.localName,
+          class: target.className,
+          id: target.id,
+        },
+        type,
+      });
+      console.log(result);
+      chrome.storage.sync.set({ eventsTeste: result.eventsTeste });
+      console.log("-------------------");
+    });
+  }
 
-            if(userAction === undefined) {
-                userEvents = [];
-            } else {
-                userEvents = JSON.parse(userAction);
-            }
+  if (type === "change") {
+    chrome.storage.sync.get(["eventsTeste"], (result) => {
+      result.eventsTeste.push({
+        URL: target.baseURI,
+        target: {
+          tag: target.localName,
+          class: target.className,
+          id: target.id,
+        },
+        type,
+        value: target.value,
+      });
+      chrome.storage.sync.set({ eventsTeste: result.eventsTeste });
+      console.log(result);
+    });
+  }
 
-            console.log(userEvents);
-        });
-
-        let newUserAction = { URL: target.baseURI, target: { tag: target.localName, class: target.className, id: target.id }, type };
-
-        userEvents.push(newUserAction);
-
-        chrome.storage.sync.set({ userActions: JSON.stringify(userEvents) });
-
-        // userActions.push(newUserAction);
-        // chrome.storage.sync.set({ "userActions": JSON.stringify(userActions) });
-        // console.log(userActions);
-        // let userActions = JSON.parse(localStorage.getItem('userActions')) || [];
-        // let newUserAction = { URL: target.baseURI, target: { tag: target.localName, class: target.className, id: target.id }, type };
-        // userActions.push(newUserAction);
-        // localStorage.setItem('userActions', JSON.stringify(userActions));
-        // userEvents.push({ URL: target.baseURI, target: { tag: target.localName, class: target.className, id: target.id }, type });
-    }
-
-    if(type === 'change') {
-        // userEvents.push({  URL: target.baseURI, target: { tag: target.localName, class: target.className, id: target.id }, type, value: target.value });
-    }
-    // console.log(userEvents);
+  console.log(userEvents);
 }

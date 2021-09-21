@@ -30,6 +30,7 @@ launcher.addEventListener('click', (event) => {
         console.log(isRecording);
 
     } else {  // começa sem gravar e cai aqui para gravar após clicar em record
+        chrome.storage.sync.set({ eventsTeste: [] });
         launcher.innerHTML = `Stop`;
         launcher.classList.remove("launch-btn");
         launcher.classList.add("stop-btn");
