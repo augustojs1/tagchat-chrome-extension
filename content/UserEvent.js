@@ -15,9 +15,11 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
           retorno = eventsTeste;
         });
 
+        console.log(retorno);
+
         chrome.storage.sync.set({ eventsTeste: [] });
 
-        //lugar onde irá exportar a gravação para o puppeteer
+        // lugar onde irá exportar a gravação para o puppeteer
       }
     });
   }
@@ -33,6 +35,7 @@ function handleUserEvent({ type, target }) {
           tag: target.localName,
           class: target.className,
           id: target.id,
+          name: target.name
         },
         type,
       });
@@ -50,6 +53,7 @@ function handleUserEvent({ type, target }) {
           tag: target.localName,
           class: target.className,
           id: target.id,
+          name: target.name
         },
         type,
         value: target.value,

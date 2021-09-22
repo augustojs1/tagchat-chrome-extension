@@ -33,6 +33,11 @@ launcher.addEventListener('click', (event) => {
 
         console.log(isRecording);
 
+        chrome.storage.sync.get("eventsTeste", (data) => {
+            postUserEvents(data);
+            console.log(data);
+        });
+
     } else {  // começa sem gravar e cai aqui para gravar após clicar em record
         chrome.storage.sync.set({ eventsTeste: [] });
         launcher.innerText = "Stop";
@@ -47,3 +52,23 @@ launcher.addEventListener('click', (event) => {
         console.log(isRecording);
     }
 });
+
+async function postUserEvents(data) {
+    const url = 'http://localhost:5002/api/v1/puppeteer';
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        "Content-Type": "application/json; charset=utf-8",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+      },
+      body: JSON.stringify(data)
+    }
+    
+    console.log(options);
+  
+    await fetch(url, options);
+  }
