@@ -14,12 +14,6 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
         chrome.storage.sync.get("eventsTeste", ({ eventsTeste }) => {
           retorno = eventsTeste;
         });
-
-        console.log(retorno);
-
-        chrome.storage.sync.set({ eventsTeste: [] });
-
-        // lugar onde irá exportar a gravação para o puppeteer
       }
     });
   }
@@ -35,11 +29,11 @@ function handleUserEvent({ type, target }) {
           tag: target.localName,
           class: target.className,
           id: target.id,
-          name: target.name
+          name: target.name,
         },
         type,
       });
-      console.log(result);
+
       chrome.storage.sync.set({ eventsTeste: result.eventsTeste });
       console.log("-------------------");
     });
@@ -53,15 +47,12 @@ function handleUserEvent({ type, target }) {
           tag: target.localName,
           class: target.className,
           id: target.id,
-          name: target.name
+          name: target.name,
         },
         type,
         value: target.value,
       });
       chrome.storage.sync.set({ eventsTeste: result.eventsTeste });
-      console.log(result);
     });
   }
-
-  console.log(userEvents);
 }
