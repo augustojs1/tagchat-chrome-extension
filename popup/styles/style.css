@@ -21,10 +21,9 @@ img {
 
 /* Record/Stop button styling */
 .launch-btn {
-    z-index: 9999999;
     border: 1px solid #1B402E;
-    margin-top: 1rem;
     padding: 1rem;
+    margin: 1rem 1rem;
     color: #FEFEFE;
     font-weight: bold;
     font-size: 1rem;
@@ -32,7 +31,6 @@ img {
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    margin-bottom: 1rem;
 }
 
 .launch-btn:hover {
@@ -46,9 +44,7 @@ img {
 }
 
 .stop-btn {
-    z-index: 9999999;
     border: 1px solid #b71a3b;
-    margin-top: 1rem;
     padding: 1rem;
     color: #FEFEFE;
     font-weight: bold;
@@ -57,7 +53,6 @@ img {
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    margin-bottom: 1rem;
 }
 
 .stop-btn:hover {
@@ -84,4 +79,24 @@ img {
 .version {
     color: #C6C6C6;
     font-size: 18px;
+}
+
+/* Export button styling */
+.export-btn {
+    margin: 1rem 0rem;
+    border: 1px solid #11988D;
+    padding: 0.9rem;
+    color: #FEFEFE;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: #11988D;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.export-btn:hover {
+    color: #11988D;
+    background-color: #FEFEFE;
+    text-align: center;
 }
