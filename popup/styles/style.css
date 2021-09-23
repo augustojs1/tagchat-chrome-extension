@@ -18,22 +18,21 @@ img {
     width: 30px;
 }
 
-
 /* Record/Stop button styling */
 .launch-btn {
-    border: 1px solid #1B402E;
+    border: 2px solid #1B402E;
     padding: 1rem;
-    margin: 1rem 1rem;
+    margin: 1rem;
     color: #FEFEFE;
     font-weight: bold;
     font-size: 1rem;
     background-color: #1B402E;
-    border: none;
     border-radius: 3px;
     cursor: pointer;
 }
 
 .launch-btn:hover {
+    border: 2px solid #1B402E;
     color: #1B402E;
     background-color: #FEFEFE;
     text-align: center;
@@ -44,18 +43,19 @@ img {
 }
 
 .stop-btn {
-    border: 1px solid #b71a3b;
+    border: 2px solid #b71a3b;
     padding: 1rem;
+    margin: 1rem;
     color: #FEFEFE;
     font-weight: bold;
     font-size: 1rem;
     background-color: #b71a3b;
-    border: none;
     border-radius: 3px;
     cursor: pointer;
 }
 
 .stop-btn:hover {
+    border: 2px solid #b71a3b;
     color: #b71a3b;
     background-color: #FEFEFE;
     text-align: center;
@@ -83,19 +83,20 @@ img {
 
 /* Export button styling */
 .export-btn {
+    display: none;
     margin: 1rem 0rem;
-    border: 1px solid #11988D;
+    border: 2px solid #11988D;
     padding: 0.9rem;
     color: #FEFEFE;
     font-weight: bold;
     font-size: 1rem;
     background-color: #11988D;
-    border: none;
     border-radius: 3px;
     cursor: pointer;
 }
 
 .export-btn:hover {
+    border: 2px solid #11988D;
     color: #11988D;
     background-color: #FEFEFE;
     text-align: center;
