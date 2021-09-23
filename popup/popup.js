@@ -21,6 +21,8 @@ chrome.storage.sync.get("recording", ({ recording }) => {
         exportBtn.style.display = "inline";
         launcher.classList.remove("stop-btn");
         launcher.classList.add("launch-btn");
+
+        checkEvents();
     }
 });
 
@@ -29,6 +31,7 @@ launcher.addEventListener('click', (event) => {
     event.preventDefault();
 
     if (isRecording === "true") {  // quando estiver gravando(true) vai cair aqui ao clicar, parando de gravar
+        checkEvents();
         launcher.innerText = "Record";
         launcher.classList.remove("stop-btn");
         exportBtn.style.display = "inline";
@@ -46,6 +49,7 @@ launcher.addEventListener('click', (event) => {
             // postUserEvents(data);
             console.log(data);
         });
+
 
     } else {  // começa sem gravar e cai aqui para gravar após clicar em record
         chrome.storage.sync.set({ eventsTeste: [] });
@@ -81,4 +85,14 @@ async function postUserEvents(data) {
     console.log(options);
   
     await fetch(url, options);
+}
+
+function checkEvents() {
+    chrome.storage.sync.get("eventsTeste", ({ eventsTeste }) => {
+        if (eventsTeste.length > 0) {
+            exportBtn.style.display = "inline";
+        } else {
+            exportBtn.style.display = "none";
+        }
+    });
 }
