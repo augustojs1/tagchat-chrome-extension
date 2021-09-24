@@ -46,7 +46,6 @@ launcher.addEventListener("click", (event) => {
     console.log(isRecording);
 
     chrome.storage.sync.get("eventsTeste", (data) => {
-      // postUserEvents(data);
       console.log(data);
     });
   } else {
@@ -92,7 +91,11 @@ async function postUserEvents(data) {
 
   console.log(options);
 
-  await fetch(url, options);
+  try {
+    await fetch(url, options);
+  } catch (error) {
+    console.log("Server offline!");
+  }
 }
 
 function checkEvents() {
