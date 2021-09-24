@@ -1,5 +1,3 @@
-let userEvents = [];
-
 chrome.storage.onChanged.addListener(function (changes, namespace) {
   if ("recording" in changes) {
     chrome.storage.sync.get("recording", ({ recording }) => {
@@ -22,7 +20,6 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 function handleUserEvent({ type, target }) {
   if (type === "click") {
     chrome.storage.sync.get(["eventsTeste"], (result) => {
-      console.log("-------------------");
       result.eventsTeste.push({
         URL: target.baseURI,
         target: {
@@ -30,12 +27,13 @@ function handleUserEvent({ type, target }) {
           class: target.className,
           id: target.id,
           name: target.name,
+          href: target.href ? target.href : "",
         },
         type,
       });
 
+      console.log(result);
       chrome.storage.sync.set({ eventsTeste: result.eventsTeste });
-      console.log("-------------------");
     });
   }
 
