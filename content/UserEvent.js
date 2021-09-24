@@ -50,6 +50,7 @@ function handleUserEvent({ type, target }) {
         type,
         value: target.value,
       });
+      console.log(result);
       chrome.storage.sync.set({ eventsTeste: result.eventsTeste });
     });
   }
