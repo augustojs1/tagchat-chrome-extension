@@ -8,16 +8,21 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
         document.removeEventListener("click", handleUserEvent);
         document.removeEventListener("change", handleUserEvent);
 
-        let retorno;
         chrome.storage.sync.get("eventsTeste", ({ eventsTeste }) => {
-          retorno = eventsTeste;
+          console.log(eventsTeste);
         });
       }
     });
   }
 });
 
-function handleUserEvent({ type, target }) {
+// function clickTarget(event) {
+//   console.log(event);
+// }
+
+function handleUserEvent(event) {
+  const target = event.target;
+  const type = event.type;
   if (type === "click") {
     chrome.storage.sync.get(["eventsTeste"], (result) => {
       result.eventsTeste.push({
@@ -28,6 +33,7 @@ function handleUserEvent({ type, target }) {
           id: target.id,
           name: target.name,
           href: target.href ? target.href : "",
+          value: target.value ? target.value : "",
         },
         type,
       });
@@ -46,11 +52,14 @@ function handleUserEvent({ type, target }) {
           class: target.className,
           id: target.id,
           name: target.name,
+          value: target.value,
         },
         type,
-        value: target.value,
       });
       console.log(result);
+      console.log("------------------------------------------------------");
+      console.log(event);
+      console.log("------------------------------------------------------");
       chrome.storage.sync.set({ eventsTeste: result.eventsTeste });
     });
   }
