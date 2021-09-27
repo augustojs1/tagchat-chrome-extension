@@ -67,36 +67,15 @@ launcher.addEventListener("click", (event) => {
 exportBtn.addEventListener("click", (event) => {
   event.preventDefault();
 
-  chrome.storage.sync.get("eventsTeste", (userEvents) => {
-    postUserEvents(userEvents);
-
-    chrome.storage.sync.set({ eventsTeste: [] });
-  });
+  chrome.storage.sync.set({ eventsTeste: [] });
 });
 
-async function postUserEvents(data) {
-  const url = "http://localhost:5002/api/v1/puppeteer";
-
-  const options = {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json; charset=utf-8",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
-    },
-    body: JSON.stringify(data),
-  };
-
-  console.log(options);
-
-  try {
-    await fetch(url, options);
-  } catch (error) {
-    console.log("Server offline!");
-  }
-}
+//   headers: {
+//   Accept: "application/json",
+//   "Content-Type": "application/json; charset=utf-8",
+//   "Access-Control-Allow-Origin": "*",
+//   "Access-Control-Allow-Headers": "Content-Type",
+//   "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE,PUT",
 
 function checkEvents() {
   chrome.storage.sync.get("eventsTeste", ({ eventsTeste }) => {
