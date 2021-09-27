@@ -1,25 +1,3 @@
-chrome.storage.onChanged.addListener(function (changes, namespace) {
-  if ("recording" in changes) {
-    chrome.storage.sync.get("recording", ({ recording }) => {
-      if (recording === "true") {
-        document.addEventListener("click", handleUserEvent);
-        document.addEventListener("change", handleUserEvent);
-      } else {
-        document.removeEventListener("click", handleUserEvent);
-        document.removeEventListener("change", handleUserEvent);
-
-        chrome.storage.sync.get("eventsTeste", ({ eventsTeste }) => {
-          console.log(eventsTeste);
-        });
-      }
-    });
-  }
-});
-
-// function clickTarget(event) {
-//   console.log(event);
-// }
-
 function handleUserEvent(event) {
   const target = event.target;
   const type = event.type;
@@ -56,6 +34,7 @@ function handleUserEvent(event) {
         },
         type,
       });
+
       console.log(result);
       console.log("------------------------------------------------------");
       console.log(event);
